@@ -7,7 +7,126 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
 
-    </Grid>
+    <SplitView
+        x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+        CompactPaneLength="60" OpenPaneLength="170">
+
+        <SplitView.Pane>
+            
+            <StackPanel Background="#444242">
+                
+                <Button
+                    x:Name="HamburgerButton"
+                    Content="&#xE700;"
+                    Click="HamburgerButton_Click"/>
+
+                <StackPanel Orientation="Horizontal">
+                    
+                    <Button
+                        x:Name="Home"
+                        Content="&#xE80F;"/>
+
+                    <TextBlock Text="Home"/>
+                    
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Button
+                        x:Name="Research"
+                        Content="&#xE825;"/>
+
+                    <TextBlock Text="Research"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    
+                    <Button
+                        x:Name="News"
+                        Content="&#xE8F3;"/>
+                    
+                    <TextBlock Text="News"/>
+                
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Button
+                        x:Name="Degrees"
+                        Content="&#xE7BE;"/>
+
+                    <TextBlock Text="Degrees"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Button
+                        x:Name="Minors"
+                        Content="&#xE928;"/>
+
+                    <TextBlock Text="Minors"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Button
+                        x:Name="Employment"
+                        Content="&#xE822;"/>
+
+                    <TextBlock Text="Employment"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Button
+                        x:Name="People"
+                        Content="&#xE805;"/>
+
+                    <TextBlock Text="People"/>
+
+                </StackPanel>
+
+            </StackPanel>
+            
+        </SplitView.Pane>
+        
+        <SplitView.Content>
+            
+            <Grid>
+                
+                <TextBlock
+                    Text="SplitView Basic"
+                    FontSize="54"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+                
+            </Grid>
+            
+        </SplitView.Content>
+        
+    </SplitView>
+    
 </Page>
