@@ -20,43 +20,11 @@ namespace Project3
         public People()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             populateEmploymentAsync(sender);
-
-            if (FacultyList.SelectedItems.Count > 0)
-            {
-                deselectFacultyViewItems();
-            }
-            if (StaffList.SelectedItems.Count > 0)
-            {
-                deselectStaffViewItems();
-            }
-        }
-
-        private void deselectFacultyViewItems()
-        {
-            foreach (ListViewItem item in this.FacultyList.Items)
-            {
-                if (item.IsSelected)
-                {
-                    item.IsSelected = false;
-                }
-            }
-        }
-
-        private void deselectStaffViewItems()
-        {
-            foreach (ListViewItem item in this.StaffList.Items)
-            {
-                if (item.IsSelected)
-                {
-                    item.IsSelected = false;
-                }
-            }
         }
 
         private async void populateEmploymentAsync(object sender)
@@ -69,6 +37,8 @@ namespace Project3
                 H2People.Text = people.subTitle;
                 populateFacultyView(people.faculty);
                 populateStaffView(people.staff);
+                FacultyList.SelectionChanged += FacultyList_SelectionChanged;
+                StaffList.SelectionChanged += StaffList_SelectionChanged;
             }
         }
 
@@ -78,7 +48,6 @@ namespace Project3
             ImageBrush ib;
             TextBlock tb;
             StackPanel sp;
-            ListViewItem lvi;
             foreach (Faculty f in fac)
             {
                 var src = new Image
@@ -100,9 +69,6 @@ namespace Project3
                 sp = new StackPanel();
                 sp.Children.Add(el);
                 sp.Children.Add(tb);
-                StackPanel[] pn = new StackPanel[1];
-                pn[0] = sp;
-                lvi = new ListViewItem(pn);
                 FacultyList.Items.Add(sp);
             }
         }

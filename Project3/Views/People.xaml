@@ -30,9 +30,81 @@
         </Style>
         <Style TargetType="ListView">
             <Setter Property="Height" Value="250"/>
-            <Setter Property="Margin" Value="25"/>
+            <Setter Property="Margin" Value="20"/>
             <Setter Property="Background" Value="#b8bec6"/>
         </Style>
+        <Style x:Key="ListViewBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="AliceBlue"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <DataTemplate x:Key="FacultyViewHeader">
+            <StackPanel>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="AliceBlue"/>
+                </StackPanel.Background>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Height" Value="250"/>
+                        <Setter Property="Padding" Value="0 75 0 0"/>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="Faculty" Foreground="Gray">
+                    <TextBlock.Style>
+                        <Style  BasedOn="{StaticResource HeaderStyleH2}" TargetType="TextBlock">
+                            <Setter Property="Padding" Value="0 10 0 10"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="40"/>
+                            <Setter Property="FontFamily" Value="Parsons"/>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="&#xE70D;">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="40"/>
+                            <Setter Property="Margin" Value="10"/>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="StaffViewHeader">
+            <StackPanel>
+                <StackPanel.Background>
+                    <SolidColorBrush Color="AliceBlue"/>
+                </StackPanel.Background>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Height" Value="250"/>
+                        <Setter Property="Padding" Value="0 75 0 0"/>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Text="Staff" Foreground="Gray">
+                    <TextBlock.Style>
+                        <Style  BasedOn="{StaticResource HeaderStyleH2}" TargetType="TextBlock">
+                            <Setter Property="Padding" Value="0 10 0 10"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="40"/>
+                            <Setter Property="FontFamily" Value="Parsons"/>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="&#xE70D;">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="40"/>
+                            <Setter Property="Margin" Value="10"/>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
     <ScrollViewer VerticalAlignment="Stretch">
         <Grid
@@ -50,6 +122,7 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
             <Grid
+                Padding="50"
                 Grid.Column="0"
                 Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -60,11 +133,12 @@
                     <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-
-                <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH2}" Text="Faculty" Foreground="Gray" x:Name="H2Faculty"/>
-                <ListView Grid.Column="0" SelectionChanged="FacultyList_SelectionChanged" Grid.Row="1" x:Name="FacultyList"/>
-                <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource HeaderStyleH2}" Text="Staff" Foreground="Gray" x:Name="H2Staff"/>
-                <ListView Grid.Column="1" SelectionChanged="StaffList_SelectionChanged" Grid.Row="1" x:Name="StaffList"/>
+                <Border Style="{StaticResource ListViewBorder}">
+                    <ListView HeaderTemplate="{StaticResource FacultyViewHeader}" Grid.Column="0" Grid.Row="0" x:Name="FacultyList"/>
+                </Border>
+                <Border Style="{StaticResource ListViewBorder}">
+                    <ListView HeaderTemplate="{StaticResource StaffViewHeader}"  Grid.Column="1" Grid.Row="0" x:Name="StaffList"/>
+                </Border>
             </Grid>
         </Grid>
     </ScrollViewer>
