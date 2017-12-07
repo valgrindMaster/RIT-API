@@ -6,8 +6,72 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <Page.Resources>
+        <Style x:Key="GridTable" TargetType="Grid">
+            <Setter Property="Margin" Value="25"/>
+            <Setter Property="Background" Value="#38393a"/>
+        </Style>
+    </Page.Resources>
+    <ScrollViewer VerticalAlignment="Stretch">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Ellipse Grid.Column="0" Grid.Row="0" Width="200" Height="200">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="Profile_Img"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" x:Name="name"/>
+            <Grid 
+                Grid.Column="0" 
+                Grid.Row="2" 
+                x:Name="GridTable">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Username: "/>
+                <TextBlock x:Name="username"/>
+                <TextBlock Text="Official Title: "/>
+                <TextBlock x:Name="title"/>
+                <TextBlock Text="Tagline: "/>
+                <TextBlock x:Name="tagline"/>
+                <TextBlock Text="Office: "/>
+                <TextBlock x:Name="office"/>
+                <TextBlock Text="Email Address: "/>
+                <TextBlock x:Name="email"/>
+                <TextBlock Text="Phone Number: "/>
+                <TextBlock x:Name="phone"/>
+                <TextBlock Text="Website: "/>
+                <TextBlock x:Name="website"/>
+                <TextBlock Text="Area of Interest: "/>
+                <TextBlock x:Name="interest"/>
+                <TextBlock Text="Twitter: "/>
+                <TextBlock x:Name="twitter"/>
+                <TextBlock Text="Facebook: "/>
+                <TextBlock x:Name="facebook"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>
