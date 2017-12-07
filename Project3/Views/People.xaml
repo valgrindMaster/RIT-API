@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="Project3.People"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+    
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        </Style>
+        <Style x:Key="HeaderStyleH1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Padding" Value="10 5 10 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="HeaderStyleH2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#9c9fa3"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+    <ScrollViewer VerticalAlignment="Stretch">
+        <Grid 
+            Height="800"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch">
+            <Grid
+                Width="800"
+                HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="350"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
+                
+                <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource HeaderStyleH2}" Foreground="Gray" x:Name="H2Faculty"/>
+                <ListView x:Name="FacultyList">
+                    
+                </ListView>
+                
+                <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource HeaderStyleH2}" Foreground="Gray" x:Name="H2Staff"/>
+                <ListView x:Name="StaffList">
+
+                </ListView>
+                
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>
