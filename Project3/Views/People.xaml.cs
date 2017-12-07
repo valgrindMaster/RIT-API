@@ -1,8 +1,13 @@
-﻿using Project3.Wrappers;
+﻿using Project3.Views;
+using Project3.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Shapes;
 
 namespace Project3
 {
@@ -10,6 +15,7 @@ namespace Project3
     {
         private const string API_PEOPLE = "http://ist.rit.edu/api/people/";
         static HttpClient client = new HttpClient();
+        Project3.Wrappers.People people;
 
         public People()
         {
@@ -24,7 +30,6 @@ namespace Project3
 
         private async void populateEmploymentAsync(object sender)
         {
-            Project3.Wrappers.People people = null;
             HttpResponseMessage response = await client.GetAsync(API_PEOPLE);
             if (response.IsSuccessStatusCode)
             {
@@ -32,20 +37,111 @@ namespace Project3
                 H1People.Text = people.title;
                 H2People.Text = people.subTitle;
                 populateFacultyView(people.faculty);
-                //Description.Text = about.description;
-                //Quote.NavigateToString();
+                populateStaffView(people.staff);
             }
         }
 
         private void populateFacultyView(List<Faculty> fac)
         {
-            WebView wv;
+            Ellipse el;
+            ImageBrush ib;
+            TextBlock tb;
+            StackPanel sp;
             foreach (Faculty f in fac)
             {
-                wv = new WebView();
-                wv.NavigateToString("");
-                FacultyList.Items.Add(wv);
+                var src = new Image
+                            {
+                                Source = new BitmapImage(
+                                    new Uri(
+                                        f.imagePath))
+                            };
+                el = new Ellipse();
+                el.Width = 100;
+                el.Height = 100;
+                el.Margin = new Thickness(25);
+                ib = new ImageBrush();
+                ib.ImageSource = src.Source;
+                el.Fill = ib;
+                tb = new TextBlock();
+                tb.Text = f.name;
+                tb.TextAlignment = TextAlignment.Center;
+                sp = new StackPanel();
+                sp.Children.Add(el);
+                sp.Children.Add(tb);
+                FacultyList.Items.Add(sp);
             }
+        }
+
+        private void populateStaffView(List<Staff> staff)
+        {
+            Ellipse el;
+            ImageBrush ib;
+            TextBlock tb;
+            StackPanel sp;
+            foreach (Staff s in staff)
+            {
+                var src = new Image
+                {
+                    Source = new BitmapImage(
+                                    new Uri(
+                                        s.imagePath))
+                };
+                el = new Ellipse();
+                el.Width = 100;
+                el.Height = 100;
+                el.Margin = new Thickness(25);
+                ib = new ImageBrush();
+                ib.ImageSource = src.Source;
+                el.Fill = ib;
+                tb = new TextBlock();
+                tb.Text = s.name;
+                tb.TextAlignment = TextAlignment.Center;
+                sp = new StackPanel();
+                sp.Children.Add(el);
+                sp.Children.Add(tb);
+                StaffList.Items.Add(sp);
+            }
+        }
+
+        private Faculty getFacultyMember(List<Faculty> fac, string name)
+        {
+            foreach (Faculty f in fac) {
+                if (f.name.Equals(name))
+                {
+                    return f;
+                }
+            }
+
+            return null;
+        }
+
+        private Staff getStaffMember(List<Staff> staff, string name)
+        {
+            foreach (Staff s in staff)
+            {
+                if (s.name.Equals(name))
+                {
+                    return s;
+                }
+            }
+
+            return null;
+        }
+
+        private void FacultyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel sp = (StackPanel)e.AddedItems[0];
+            TextBlock tb = (TextBlock)sp.Children[1];
+            Faculty facMem = getFacultyMember(people.faculty, tb.Text);
+            Frame.Navigate(typeof(PeopleDetail), facMem);
+        }
+
+        private void StaffList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StackPanel sp = (StackPanel)e.AddedItems[0];
+            TextBlock tb = (TextBlock)sp.Children[1];
+            Staff staffMem = getStaffMember(people.staff, tb.Text);
+            Frame.Navigate(typeof(PeopleDetail), staffMem);
         }
     }
 }

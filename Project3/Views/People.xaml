@@ -14,48 +14,57 @@
             <Setter Property="TextWrapping" Value="WrapWholeWords"/>
         </Style>
         <Style x:Key="HeaderStyleH1" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="25"/>
-            <Setter Property="Padding" Value="10 5 10 5"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Padding" Value="20"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="HeaderStyleH2" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#9c9fa3"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Padding" Value="20"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Height" Value="250"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Height" Value="250"/>
+            <Setter Property="Margin" Value="25"/>
+            <Setter Property="Background" Value="#b8bec6"/>
         </Style>
     </Page.Resources>
     <ScrollViewer VerticalAlignment="Stretch">
-        <Grid 
-            Height="800"
+        <Grid
             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
             <Grid
-                Width="800"
-                HorizontalAlignment="Center">
+                Grid.Column="0"
+                Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="350"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
-                
-                <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource HeaderStyleH2}" Foreground="Gray" x:Name="H2Faculty"/>
-                <ListView x:Name="FacultyList">
-                    
-                </ListView>
-                
-                <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource HeaderStyleH2}" Foreground="Gray" x:Name="H2Staff"/>
-                <ListView x:Name="StaffList">
 
-                </ListView>
-                
+                <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH2}" Text="Faculty" Foreground="Gray" x:Name="H2Faculty"/>
+                <ListView Grid.Column="0" SelectionChanged="FacultyList_SelectionChanged" Grid.Row="1" x:Name="FacultyList"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource HeaderStyleH2}" Text="Staff" Foreground="Gray" x:Name="H2Staff"/>
+                <ListView Grid.Column="1" SelectionChanged="StaffList_SelectionChanged" Grid.Row="1" x:Name="StaffList"/>
             </Grid>
         </Grid>
     </ScrollViewer>
