@@ -133,5 +133,17 @@ namespace Project3
 
             toggleSplitViewPane();
         }
+
+        private void Contact_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = this.DataContext as Frame;
+            Page page = frame?.Content as Page;
+            if (page?.GetType() != typeof(Contact))
+            {
+                frame.Navigate(typeof(Contact));
+            }
+
+            toggleSplitViewPane();
+        }
     }
 }

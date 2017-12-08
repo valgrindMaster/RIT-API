@@ -32,7 +32,8 @@ namespace Project3
                 about = await response.Content.ReadAsAsync<Project3.Wrappers.About>();
                 Title.Text = about.title;
                 Description.Text = about.description;
-                Quote.NavigateToString(String.Format(Project3.Constants.QUOTATION_STR, about.quote, about.quoteAuthor));
+                Quote.Text = "\"" + about.quote + "\"";
+                QuoteAuthor.Text = about.quoteAuthor;
             }
         }
     }
