@@ -15,14 +15,14 @@
         </Style>
         <Style x:Key="HeaderStyleH1" TargetType="TextBlock">
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Padding" Value="20"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="HeaderStyleH2" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#9c9fa3"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Padding" Value="20"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="LineHeight" Value="10"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
         </Style>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -120,8 +120,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
-            <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
+            <TextBlock Margin="100 25 0 0" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
+            <TextBlock Margin="100 25 0 0" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
             <Grid
                 Padding="50"
                 Grid.Column="0"

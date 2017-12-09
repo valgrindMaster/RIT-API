@@ -11,15 +11,32 @@
             <Setter Property="Margin" Value="25"/>
             <Setter Property="Background" Value="#38393a"/>
         </Style>
-        <ImageBrush x:Key="backgroundImg" Stretch="UniformToFill" ImageSource="/Assets/home_bg.jpg"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+        <Style x:Key="TableCategory" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="TableValue" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="ExtraLight"/>
+            <Setter Property="FontStyle" Value="Oblique"/>
+        </Style>
+        <Style x:Key="Card" TargetType="Grid">
+            <Setter Property="Background" Value="#f9f9f7"/>
+            <Setter Property="CornerRadius" Value="15"/>
+        </Style>
+        <ImageBrush x:Key="backgroundImg" Stretch="UniformToFill" ImageSource="/Assets/person_bg.jpg"/>
     </Page.Resources>
     <ScrollViewer 
+        Background="{ThemeResource backgroundImg}"
         x:Name="ProfileScroller" 
         HorizontalAlignment="Stretch" 
         VerticalAlignment="Stretch">
-        <Grid Background="{ThemeResource backgroundImg}"
-                  VerticalAlignment="Stretch"
-                  HorizontalAlignment="Stretch">
+        <Grid 
+            Style="{StaticResource Card}"
+            Padding="50"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
@@ -35,9 +52,9 @@
             </Ellipse>
             <TextBlock FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" x:Name="name"/>
             <Grid 
-                    Grid.Column="0" 
-                    Grid.Row="2" 
-                    x:Name="GridTable">
+                Grid.Column="0" 
+                Grid.Row="2" 
+                x:Name="GridTable">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
@@ -53,28 +70,27 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Username: "/>
-                <TextBlock x:Name="username"/>
-                <TextBlock Text="Official Title: "/>
-                <TextBlock x:Name="title"/>
-                <TextBlock Text="Tagline: "/>
-                <TextBlock x:Name="tagline"/>
-                <TextBlock Text="Office: "/>
-                <TextBlock x:Name="office"/>
-                <TextBlock Text="Email Address: "/>
-                <TextBlock x:Name="email"/>
-                <TextBlock Text="Phone Number: "/>
-                <TextBlock x:Name="phone"/>
-                <TextBlock Text="Website: "/>
-                <TextBlock x:Name="website"/>
-                <TextBlock Text="Area of Interest: "/>
-                <TextBlock x:Name="interest"/>
-                <TextBlock Text="Twitter: "/>
-                <TextBlock x:Name="twitter"/>
-                <TextBlock Text="Facebook: "/>
-                <TextBlock x:Name="facebook"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Username: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Username}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Official Title: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Title}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Tagline: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Tagline}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Office: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Office}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Email Address: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Email}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Phone Number: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Phone}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Website: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Website}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="Area of Interest: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Interest}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="8" Text="Twitter: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding Twitter}" Style="{StaticResource TableValue}"/>
+                <TextBlock Grid.Column="0" Grid.Row="9" Text="Facebook: " Style="{StaticResource TableCategory}"/>
+                <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding Facebook}" Style="{StaticResource TableValue}"/>
             </Grid>
         </Grid>
     </ScrollViewer>
