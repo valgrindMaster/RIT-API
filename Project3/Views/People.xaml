@@ -10,19 +10,24 @@
     mc:Ignorable="d">
     
     <Page.Resources>
-        <Style TargetType="TextBlock">
+        <Style x:Key="TextBlockParent" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="WrapWholeWords"/>
-        </Style>
-        <Style x:Key="HeaderStyleH1" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="HeaderStyleH2" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#9c9fa3"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="LineHeight" Value="10"/>
             <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+        <Style x:Key="HeaderStyleH1" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="HeaderStyleH2" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25"/>
         </Style>
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -106,6 +111,7 @@
                 </TextBlock>
             </StackPanel>
         </DataTemplate>
+        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/people_banner.jpg"/>
     </Page.Resources>
     <ScrollViewer VerticalAlignment="Stretch">
         <Grid
@@ -118,12 +124,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <TextBlock Margin="100 25 0 0" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
+            <StackPanel 
+            Height="300"
+            Grid.Column="0" 
+            Grid.Row="0" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Orientation="Horizontal"
+            Background="{ThemeResource bannerImg}">
+                <TextBlock Margin="100 25 0 0" Grid.Column="0" Grid.Row="0" Style="{StaticResource HeaderStyleH1}" x:Name="H1People"/>
+            </StackPanel>
             <TextBlock Margin="100 25 0 0" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}" x:Name="H2People"/>
             <Grid
-                Padding="50"
+                Padding="50 0 50 25"
                 Grid.Column="0"
                 Grid.Row="2">
                 <Grid.ColumnDefinitions>

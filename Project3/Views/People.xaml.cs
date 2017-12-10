@@ -15,24 +15,25 @@ namespace Project3
     {
         private const string API_PEOPLE = "http://ist.rit.edu/api/people/";
         static HttpClient client = new HttpClient();
-        Project3.Wrappers.People people;
+        Wrappers.People people;
 
         public People()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            populateEmploymentAsync(sender);
+            populatePeopleAsync(sender);
         }
 
-        private async void populateEmploymentAsync(object sender)
+        private async void populatePeopleAsync(object sender)
         {
             HttpResponseMessage response = await client.GetAsync(API_PEOPLE);
             if (response.IsSuccessStatusCode)
             {
-                people = await response.Content.ReadAsAsync<Project3.Wrappers.People>();
+                people = await response.Content.ReadAsAsync<Wrappers.People>();
                 H1People.Text = people.title;
                 H2People.Text = people.subTitle;
                 populateFacultyView(people.faculty);

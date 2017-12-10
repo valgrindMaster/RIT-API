@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project3.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -129,6 +130,18 @@ namespace Project3
             if (page?.GetType() != typeof(People))
             {
                 frame.Navigate(typeof(People));
+            }
+
+            toggleSplitViewPane();
+        }
+
+        private void Map_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = this.DataContext as Frame;
+            Page page = frame?.Content as Page;
+            if (page?.GetType() != typeof(JobMap))
+            {
+                frame.Navigate(typeof(JobMap));
             }
 
             toggleSplitViewPane();

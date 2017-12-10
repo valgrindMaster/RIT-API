@@ -5,9 +5,106 @@
     xmlns:local="using:Project3"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="pageTitle" Text="Degrees" />
-    </Grid>
+    <Page.Resources>
+        <Style x:Key="TextBlockParent" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+        <Style x:Key="HeaderStyleH1" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="HeaderStyleH2" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="HeaderStyleH3" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25 5 0 5"/>
+        </Style>
+        <Style x:Key="ListViewBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="MaxHeight" Value="200"/>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+        <Style x:Key="ListViewItemDate" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="275"/>
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        </Style>
+        <Style x:Key="ListViewItemTitle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+        </Style>
+        <Style x:Key="SmallListView" TargetType="ListView">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/degrees_banner.jpg"/>
+    </Page.Resources>
+    <ScrollViewer
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch">
+        <Grid 
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <StackPanel 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Orientation="Horizontal"
+            Background="{ThemeResource bannerImg}">
+                <TextBlock x:Name="DegreesHeader" Text="Degrees At RIT" Style="{StaticResource HeaderStyleH1}"/>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="RIT offers a wide array of degree paths to both grads and undergrads." Style="{StaticResource HeaderStyleH2}"/>
+            <Grid 
+                Padding="50"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Grid.Column="0" 
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Graduate:" HorizontalAlignment="Left" Style="{StaticResource HeaderStyleH3}"/>
+                <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource ListViewBorder}">
+                    <ListView Style="{StaticResource SmallListView}" x:Name="GraduateList"/>
+                </Border>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Undergraduate:" HorizontalAlignment="Left" Style="{StaticResource HeaderStyleH3}"/>
+                <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource ListViewBorder}">
+                    <ListView Style="{StaticResource SmallListView}" x:Name="UndergraduateList"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

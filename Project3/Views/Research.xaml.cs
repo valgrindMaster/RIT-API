@@ -1,31 +1,94 @@
-﻿using System;
+﻿using Project3.Views;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using System.Net.Http;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Project3
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Research : Page
     {
+        private const string API_RESEARCH = "http://ist.rit.edu/api/research/";
+        static HttpClient client = new HttpClient();
+        Wrappers.Research research;
+
         public Research()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+        }
+
+        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            populateResearchAsync(sender);
+        }
+
+        private async void populateResearchAsync(object sender)
+        {
+            HttpResponseMessage response = await client.GetAsync(API_RESEARCH);
+            if (response.IsSuccessStatusCode)
+            {
+                research = await response.Content.ReadAsAsync<Wrappers.Research>();
+
+                TextBlock interestAreaItem;
+                foreach (Wrappers.ByInterestArea entry in research.byInterestArea)
+                {
+                    interestAreaItem = new TextBlock();
+                    interestAreaItem.Padding = new Windows.UI.Xaml.Thickness(10);
+                    interestAreaItem.Text = entry.areaName;
+                    ByInterestList.Items.Add(interestAreaItem);
+                    ByInterestList.SelectionChanged += InterestList_SelectionChangedAsync;
+                }
+
+                TextBlock facultyItem;
+                foreach (Wrappers.ByFaculty entry in research.byFaculty)
+                {
+                    facultyItem = new TextBlock();
+                    facultyItem.Padding = new Windows.UI.Xaml.Thickness(10);
+                    facultyItem.Text = entry.facultyName;
+                    ByFacultyList.Items.Add(facultyItem);
+                    ByFacultyList.SelectionChanged += FacultyList_SelectionChangedAsync;
+                }
+            }
+        }
+
+        private void InterestList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
+        {
+            TextBlock interestAreaBlock = (TextBlock)((ListView)sender).SelectedItem;
+            Wrappers.ByInterestArea area = getResearchByInterestDetail(research.byInterestArea, interestAreaBlock.Text);
+            Frame.Navigate(typeof(ResearchDetail), area);
+        }
+
+        private void FacultyList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
+        {
+            TextBlock facultyBlock = (TextBlock)((ListView)sender).SelectedItem;
+            Wrappers.ByFaculty faculty = getResearchByFacultyDetail(research.byFaculty, facultyBlock.Text);
+            Frame.Navigate(typeof(ResearchDetail), faculty);
+        }
+
+        private Wrappers.ByInterestArea getResearchByInterestDetail(List<Wrappers.ByInterestArea> area, string title)
+        {
+            foreach (Wrappers.ByInterestArea a in area)
+            {
+                if (title.Equals(a.areaName))
+                {
+                    return a;
+                }
+            }
+
+            return null;
+        }
+
+        private Wrappers.ByFaculty getResearchByFacultyDetail(List<Wrappers.ByFaculty> fac, string title)
+        {
+            foreach (Wrappers.ByFaculty f in fac)
+            {
+                if (title.Equals(f.facultyName))
+                {
+                    return f;
+                }
+            }
+
+            return null;
         }
     }
 }

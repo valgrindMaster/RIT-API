@@ -51,7 +51,7 @@ namespace Project3
                 {
                     // Create a Frame to act as the navigation context and navigate to the first page
                     rootFrame = new Frame();
-                    rootFrame.Navigate(typeof(Home));
+                    rootFrame.Navigate(typeof(Project3.Views.Home));
                     rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
                     rootFrame.NavigationFailed += OnNavigationFailed;
 

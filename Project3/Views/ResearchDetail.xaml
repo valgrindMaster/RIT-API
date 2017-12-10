@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="Project3.Views.ResearchDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Project3.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="TextBlockParent" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+        <Style x:Key="HeaderStyleH1" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="HeaderStyleH2" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="CitationsBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+        <Style x:Key="CitationsListView" TargetType="ListView">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="200"/>
+        </Style>
+        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/research_detail_banner.jpg"/>
+    </Page.Resources>
+    <ScrollViewer 
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        x:Name="NewsDetailScroller" 
+        HorizontalAlignment="Stretch" 
+        VerticalAlignment="Stretch">
+        <Grid
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            Grid.Column="0" 
+            Grid.Row="2" 
+            x:Name="GridTable">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <StackPanel 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Height="200"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Orientation="Horizontal"
+            Background="{ThemeResource bannerImg}">
+                <TextBlock x:Name="NewsTitle" Text="{Binding Title}" Style="{StaticResource HeaderStyleH1}"/>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Citations" Style="{StaticResource HeaderStyleH2}"/>
+            <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource CitationsBorder}">
+                <ListView Style="{StaticResource CitationsListView}" x:Name="Citations"/>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Page>

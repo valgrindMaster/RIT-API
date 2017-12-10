@@ -3,11 +3,10 @@ using System.Net.Http;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Project3
+namespace Project3.Views
 {
     public sealed partial class Home : Page
     {
-        private const string API_MAP = "http://ist.rit.edu/api/map/";
         private const string API_ABOUT = "http://ist.rit.edu/api/about/";
         static HttpClient client = new HttpClient();
 
@@ -20,7 +19,6 @@ namespace Project3
         private void Home_Loaded(object sender, RoutedEventArgs e)
         {
             populateAboutAsync(sender);
-            Map.NavigateToString(String.Format(Project3.Constants.MAP_STR, API_MAP));
         }
 
         private async void populateAboutAsync(object sender)
