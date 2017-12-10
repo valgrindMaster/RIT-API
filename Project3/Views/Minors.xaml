@@ -5,9 +5,58 @@
     xmlns:local="using:Project3"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <Style x:Key="TextBlockParent" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+        <Style x:Key="HeaderStyleH1" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="HeaderStyleH2" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25"/>
+        </Style>
+        <Style x:Key="ListViewBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="MaxHeight" Value="250"/>
+            <Setter Property="Margin" Value="25"/>
+        </Style>
+        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/minors_banner.jpg"/>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="pageTitle" Text="Minors" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel 
+            Grid.Column="0" 
+            Grid.Row="0" 
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Orientation="Horizontal"
+            Background="{ThemeResource bannerImg}">
+            <TextBlock x:Name="MinorsHeader" Text="Minors at RIT" Style="{StaticResource HeaderStyleH1}"/>
+        </StackPanel>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="RIT offers an extensive variety of minors in a variety of areas of interest." Style="{StaticResource HeaderStyleH2}"/>
+        <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource ListViewBorder}">
+            <ListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="MinorsList"/>
+        </Border>
     </Grid>
 </Page>

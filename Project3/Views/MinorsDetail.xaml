@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Project3.Views.DegreesDetail"
+    x:Class="Project3.Views.MinorsDetail"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Project3.Views"
@@ -26,20 +26,27 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Padding" Value="25"/>
         </Style>
-        <Style x:Key="DegreesDetailBorder" TargetType="Border">
+        <Style x:Key="HeaderStyleH3" BasedOn="{StaticResource TextBlockParent}" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="25 5 0 5"/>
+        </Style>
+        <Style x:Key="CourseBorder" TargetType="Border">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="LightBlue"/>
             <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Margin" Value="25 0 0 0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="25"/>
+            <Setter Property="Width" Value="200"/>
         </Style>
-        <Style x:Key="DegreesDetailListView" TargetType="ListView">
+        <Style x:Key="CourseListView" TargetType="ListView">
             <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Height" Value="200"/>
         </Style>
-        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/degrees_detail_banner.jpg"/>
+        <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/minors_detail_banner.jpg"/>
     </Page.Resources>
     <ScrollViewer 
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -54,29 +61,41 @@
             x:Name="GridTable">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <StackPanel 
             Grid.Column="0" 
-            Grid.ColumnSpan="2"
             Grid.Row="0" 
             Height="200"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Orientation="Horizontal"
             Background="{ThemeResource bannerImg}">
-                <TextBlock x:Name="NewsHeader" Style="{StaticResource HeaderStyleH1}"/>
+                <TextBlock x:Name="TitleBlock" Text="{Binding Title}" Style="{StaticResource HeaderStyleH1}"/>
             </StackPanel>
-            <TextBlock x:Name="NewsSubheader" Grid.Column="0" Grid.Row="1" Style="{StaticResource HeaderStyleH2}"/>
-            <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource DegreesDetailBorder}">
-                <ListView Style="{StaticResource DegreesDetailListView}" x:Name="DegreesDetailList"/>
-            </Border>
-            <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="/Assets/degrees_detail_img1.jpg" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="75"/>
+            <Grid
+                Padding="150 25 150 25"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Grid.Column="0" 
+                Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="DescriptionBlock" Grid.Column="0" Grid.Row="0" Text="{Binding Description}" Style="{StaticResource HeaderStyleH2}"/>
+                <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource CourseBorder}">
+                    <ListView Style="{StaticResource CourseListView}" x:Name="CourseList"/>
+                </Border>
+                <TextBlock Grid.Column="0" Grid.Row="2" x:Name="MinorsNote" Text="{Binding Note}" Style="{StaticResource HeaderStyleH3}"/>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </Page>

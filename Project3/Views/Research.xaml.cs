@@ -1,5 +1,6 @@
 ﻿using Project3.Views;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Windows.UI.Xaml.Controls;
 
@@ -19,7 +20,10 @@ namespace Project3
 
         private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            populateResearchAsync(sender);
+            if (ByInterestList.Items.Count == 0 && ByFacultyList.Items.Count == 0)
+            {
+                populateResearchAsync(sender);
+            }
         }
 
         private async void populateResearchAsync(object sender)
@@ -53,42 +57,20 @@ namespace Project3
 
         private void InterestList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
-            TextBlock interestAreaBlock = (TextBlock)((ListView)sender).SelectedItem;
-            Wrappers.ByInterestArea area = getResearchByInterestDetail(research.byInterestArea, interestAreaBlock.Text);
-            Frame.Navigate(typeof(ResearchDetail), area);
+            Wrappers.ByInterestArea area = research.byInterestArea.ElementAt(((ListView)sender).SelectedIndex);
+            if (area != null)
+            {
+                Frame.Navigate(typeof(ResearchDetail), area);
+            }
         }
 
         private void FacultyList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
-            TextBlock facultyBlock = (TextBlock)((ListView)sender).SelectedItem;
-            Wrappers.ByFaculty faculty = getResearchByFacultyDetail(research.byFaculty, facultyBlock.Text);
-            Frame.Navigate(typeof(ResearchDetail), faculty);
-        }
-
-        private Wrappers.ByInterestArea getResearchByInterestDetail(List<Wrappers.ByInterestArea> area, string title)
-        {
-            foreach (Wrappers.ByInterestArea a in area)
+            Wrappers.ByFaculty faculty = research.byFaculty.ElementAt(((ListView)sender).SelectedIndex);
+            if (faculty != null)
             {
-                if (title.Equals(a.areaName))
-                {
-                    return a;
-                }
+                Frame.Navigate(typeof(ResearchDetail), faculty);
             }
-
-            return null;
-        }
-
-        private Wrappers.ByFaculty getResearchByFacultyDetail(List<Wrappers.ByFaculty> fac, string title)
-        {
-            foreach (Wrappers.ByFaculty f in fac)
-            {
-                if (title.Equals(f.facultyName))
-                {
-                    return f;
-                }
-            }
-
-            return null;
         }
     }
 }

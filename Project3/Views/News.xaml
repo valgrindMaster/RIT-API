@@ -29,9 +29,9 @@
         </Style>
         <Style x:Key="ListViewBorder" TargetType="Border">
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderBrush" Value="LightBlue"/>
             <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="MaxHeight" Value="250"/>
             <Setter Property="Margin" Value="25"/>
         </Style>
         <Style x:Key="ListViewItemDate" TargetType="TextBlock">

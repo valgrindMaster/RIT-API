@@ -1,6 +1,9 @@
 ﻿using Project3.Views;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml.Controls;
 
 namespace Project3
@@ -19,7 +22,10 @@ namespace Project3
 
         private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            populateResearchAsync(sender);
+            if (GraduateList.Items.Count == 0 && UndergraduateList.Items.Count == 0)
+            {
+                populateResearchAsync(sender);
+            }
         }
 
         private async void populateResearchAsync(object sender)
@@ -34,7 +40,7 @@ namespace Project3
                 {
                     gradItem = new TextBlock();
                     gradItem.Padding = new Windows.UI.Xaml.Thickness(10);
-                    gradItem.Text = entry.degreeName.ToUpper() + " - " + entry.title;
+                    gradItem.Text = setTitle(entry);
                     gradItem.TextWrapping = Windows.UI.Xaml.TextWrapping.WrapWholeWords;
                     GraduateList.Items.Add(gradItem);
                     GraduateList.SelectionChanged += GradList_SelectionChangedAsync;
@@ -45,7 +51,7 @@ namespace Project3
                 {
                     undergradItem = new TextBlock();
                     undergradItem.Padding = new Windows.UI.Xaml.Thickness(10);
-                    undergradItem.Text = entry.degreeName.ToUpper() + " - "  + entry.title;
+                    undergradItem.Text = setTitle(entry);
                     undergradItem.TextWrapping = Windows.UI.Xaml.TextWrapping.WrapWholeWords;
                     UndergraduateList.Items.Add(undergradItem);
                     UndergraduateList.SelectionChanged += UndergradList_SelectionChangedAsync;
@@ -55,42 +61,55 @@ namespace Project3
 
         private void GradList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
-            TextBlock gradBlock = (TextBlock)((ListView)sender).SelectedItem;
-            Wrappers.Graduate grad = getGradDegreesDetail(degrees.graduate, gradBlock.Text);
-            Frame.Navigate(typeof(DegreesDetail), grad);
+            Wrappers.Program program = degrees.graduate.ElementAt(((ListView)sender).SelectedIndex);
+            if (program != null)
+            {
+                Frame.Navigate(typeof(DegreesDetail), program);
+            }
         }
 
         private void UndergradList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
-            TextBlock undergradBlock = (TextBlock)((ListView)sender).SelectedItem;
-            Wrappers.Undergraduate undergrad = getUndergradDegreeDetail(degrees.undergraduate, undergradBlock.Text);
-            Frame.Navigate(typeof(DegreesDetail), undergrad);
+            Wrappers.Program program = degrees.undergraduate.ElementAt(((ListView)sender).SelectedIndex);
+            if (program != null)
+            {
+                Frame.Navigate(typeof(DegreesDetail), program);
+            }
         }
 
-        private Wrappers.Graduate getGradDegreesDetail(List<Wrappers.Graduate> grad, string title)
+        private string setTitle(Wrappers.Program program)
         {
-            foreach (Wrappers.Graduate g in grad)
+            string degreeProgram = program.getDegreeName();
+            string degreeTitle = program.getTitle();
+            string fullTitle = "";
+
+            Regex reg = new Regex("^[\x20+]?[A-Za-z0-9]+[\x20+]?$");
+            if (reg.IsMatch(program.getDegreeName()))
             {
-                if (title.Contains(g.title))
-                {
-                    return g;
-                }
+                fullTitle += degreeProgram.ToUpper();
+            }
+            else
+            {
+                fullTitle += new string(CharsToTitleCase(degreeProgram).ToArray());
             }
 
-            return null;
+            if (degreeTitle != null)
+            {
+                fullTitle += " - " + degreeTitle;
+            }
+
+            return fullTitle;
         }
 
-        private Wrappers.Undergraduate getUndergradDegreeDetail(List<Wrappers.Undergraduate> undergrad, string title)
+        IEnumerable<char> CharsToTitleCase(string s)
         {
-            foreach (Wrappers.Undergraduate u in undergrad)
+            bool newWord = true;
+            foreach (char c in s)
             {
-                if (title.Contains(u.title))
-                {
-                    return u;
-                }
+                if (newWord) { yield return Char.ToUpper(c); newWord = false; }
+                else yield return Char.ToLower(c);
+                if (c == ' ') newWord = true;
             }
-
-            return null;
         }
     }
 }

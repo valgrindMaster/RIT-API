@@ -1,10 +1,9 @@
 ﻿using Project3.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using Windows.UI.Popups;
-using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -24,7 +23,10 @@ namespace Project3.Views
 
         private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            populateNewAsync(sender);
+            if (NewsList.Items.Count == 0)
+            {
+                populateNewAsync(sender);
+            }
         }
 
         private async void populateNewAsync(object sender)
@@ -79,31 +81,12 @@ namespace Project3.Views
         private void NewsList_SelectionChangedAsync(object sender, SelectionChangedEventArgs e)
         {
             TextBlock date = (TextBlock)((StackPanel)((ListView)sender).SelectedItem).Children[0];
-            TextBlock title = (TextBlock)((StackPanel)((ListView)sender).SelectedItem).Children[1];
-            Wrappers.Older older = getNewsDetail(news.older, title.Text);
+            Wrappers.Older older = news.older.ElementAt(((ListView)sender).SelectedIndex);
             older.date = date.Text;
-            if (isGoodOlder(older))
+            if (older != null)
             {
                 Frame.Navigate(typeof(NewsDetail), older);
             }
-        }
-
-        private bool isGoodOlder(Wrappers.Older older)
-        {
-            return older.title != null && older.date != null & older.description != null;
-        }
-
-        private Wrappers.Older getNewsDetail(List<Wrappers.Older> olders, string title)
-        {
-            foreach (Wrappers.Older older in olders)
-            {
-                if (title.Equals(older.title))
-                {
-                    return older;
-                }
-            }
-
-            return null;
         }
     }
 }

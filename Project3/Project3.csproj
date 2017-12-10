@@ -93,11 +93,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Views\CourseDetail.xaml.cs">
+      <DependentUpon>CourseDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DegreesDetail.xaml.cs">
       <DependentUpon>DegreesDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JobMap.xaml.cs">
       <DependentUpon>JobMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MinorsDetail.xaml.cs">
+      <DependentUpon>MinorsDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewsDetail.xaml.cs">
       <DependentUpon>NewsDetail.xaml</DependentUpon>
@@ -166,9 +172,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\degrees_banner.jpg" />
+    <Content Include="Assets\degrees_detail_banner.jpg" />
+    <Content Include="Assets\degrees_detail_img1.jpg" />
     <Content Include="Assets\home_banner.jpg" />
     <Content Include="Assets\home_img1.jpg" />
     <Content Include="Assets\jobmap_banner.jpg" />
+    <Content Include="Assets\minors_banner.jpg" />
+    <Content Include="Assets\minors_detail_banner.jpg" />
     <Content Include="Assets\news_banner.jpg" />
     <Content Include="Assets\news_detail_banner.jpg" />
     <Content Include="Assets\people_banner.jpg" />
@@ -189,11 +199,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\CourseDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DegreesDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\JobMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MinorsDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

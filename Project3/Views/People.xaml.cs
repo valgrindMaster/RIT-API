@@ -2,6 +2,7 @@
 using Project3.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,7 +26,10 @@ namespace Project3
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            populatePeopleAsync(sender);
+            if (FacultyList.Items.Count == 0 && StaffList.Items.Count == 0)
+            {
+                populatePeopleAsync(sender);
+            }
         }
 
         private async void populatePeopleAsync(object sender)
@@ -105,45 +109,22 @@ namespace Project3
             }
         }
 
-        private Faculty getFacultyMember(List<Faculty> fac, string name)
-        {
-            foreach (Faculty f in fac) {
-                if (f.name.Equals(name))
-                {
-                    return f;
-                }
-            }
-
-            return null;
-        }
-
-        private Staff getStaffMember(List<Staff> staff, string name)
-        {
-            foreach (Staff s in staff)
-            {
-                if (s.name.Equals(name))
-                {
-                    return s;
-                }
-            }
-
-            return null;
-        }
-
         private void FacultyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            StackPanel sp = (StackPanel)e.AddedItems[0];
-            TextBlock tb = (TextBlock)sp.Children[1];
-            Faculty facMem = getFacultyMember(people.faculty, tb.Text);
-            Frame.Navigate(typeof(PeopleDetail), facMem);
+            Wrappers.Faculty faculty = people.faculty.ElementAt(((ListView)sender).SelectedIndex);
+            if (faculty != null)
+            {
+                Frame.Navigate(typeof(PeopleDetail), faculty);
+            }
         }
 
         private void StaffList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            StackPanel sp = (StackPanel)e.AddedItems[0];
-            TextBlock tb = (TextBlock)sp.Children[1];
-            Staff staffMem = getStaffMember(people.staff, tb.Text);
-            Frame.Navigate(typeof(PeopleDetail), staffMem);
+            Wrappers.Staff staff = people.staff.ElementAt(((ListView)sender).SelectedIndex);
+            if (staff != null)
+            {
+                Frame.Navigate(typeof(PeopleDetail), staff);
+            }
         }
     }
 }
