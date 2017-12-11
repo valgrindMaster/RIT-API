@@ -20,7 +20,7 @@ namespace Project3.Views
             Wrappers.Older param = (Wrappers.Older)e.Parameter;
             NewsTitle.Text = param.title;
             NewsDate.Text = param.date;
-            NewsDescription.Text = param.description;
+            NewsDescription.Text = param.description != null ? param.description : "Sorry, this article description could not be loaded. Check the API...";
             setProperties(param);
         }
 

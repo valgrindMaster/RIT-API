@@ -86,9 +86,11 @@
                     <RadioButton x:Name="NewsRadioButton" Click="News_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE825;" Content="News" GroupName="Navigation"/>
                     <RadioButton x:Name="DegreesRadioButton" Click="Degrees_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE7BE;" Content="Degrees" GroupName="Navigation"/>
                     <RadioButton x:Name="MinorsRadioButton" Click="Minors_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE928;" Content="Minors" GroupName="Navigation"/>
+                    <RadioButton x:Name="CoursesRadioButton" Click="Courses_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE8B8;" Content="Courses" GroupName="Navigation"/>
                     <RadioButton x:Name="EmploymentRadioButton" Click="Employment_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE805;" Content="Employment" GroupName="Navigation"/>
                     <RadioButton x:Name="PeopleRadioButton" Click="People_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE716;" Content="People" GroupName="Navigation"/>
                     <RadioButton x:Name="MapRadioButton" Click="Map_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE707;" Content="Job Map" GroupName="Navigation"/>
+                    <RadioButton x:Name="ResourcesRadioButton" Click="Resources_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xE706;" Content="Resources" GroupName="Navigation"/>
                     <RadioButton x:Name="ContactRadioButton" Click="Contact_Click" Style="{StaticResource NavRadioButtonStyle}" Tag="&#xF142;" Content="Contact" GroupName="Navigation"/>
                 </StackPanel>
             </ScrollViewer>

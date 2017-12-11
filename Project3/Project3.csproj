@@ -93,9 +93,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Views\CourseDetail.xaml.cs">
-      <DependentUpon>CourseDetail.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DegreesDetail.xaml.cs">
       <DependentUpon>DegreesDetail.xaml</DependentUpon>
     </Compile>
@@ -171,6 +168,7 @@
     <None Include="Project3_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\courses_banner.jpg" />
     <Content Include="Assets\degrees_banner.jpg" />
     <Content Include="Assets\degrees_detail_banner.jpg" />
     <Content Include="Assets\degrees_detail_img1.jpg" />
@@ -185,6 +183,7 @@
     <Content Include="Assets\person_bg.jpg" />
     <Content Include="Assets\research_banner.jpg" />
     <Content Include="Assets\research_detail_banner.jpg" />
+    <Content Include="Assets\resources_banner.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -199,10 +198,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\CourseDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\DegreesDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -158,5 +158,29 @@ namespace Project3
 
             toggleSplitViewPane();
         }
+
+        private void Courses_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = this.DataContext as Frame;
+            Page page = frame?.Content as Page;
+            if (page?.GetType() != typeof(Courses))
+            {
+                frame.Navigate(typeof(Courses));
+            }
+
+            toggleSplitViewPane();
+        }
+
+        private void Resources_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = this.DataContext as Frame;
+            Page page = frame?.Content as Page;
+            if (page?.GetType() != typeof(Resources))
+            {
+                frame.Navigate(typeof(Resources));
+            }
+
+            toggleSplitViewPane();
+        }
     }
 }

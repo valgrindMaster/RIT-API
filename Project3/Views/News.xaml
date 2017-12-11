@@ -43,27 +43,32 @@
         </Style>
         <ImageBrush x:Key="bannerImg" Stretch="UniformToFill" ImageSource="/Assets/news_banner.jpg"/>
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-        <StackPanel 
+    <ScrollViewer
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <StackPanel 
             Grid.Column="0" 
             Grid.Row="0" 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Orientation="Horizontal"
             Background="{ThemeResource bannerImg}">
-            <TextBlock x:Name="NewsHeader" Text="News" Style="{StaticResource HeaderStyleH1}"/>
-        </StackPanel>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="See what's been happening here at RIT!" Style="{StaticResource HeaderStyleH2}"/>
-        <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource ListViewBorder}">
-            <ListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="NewsList"/>
-        </Border>
-    </Grid>
+                <TextBlock x:Name="NewsHeader" Text="News" Style="{StaticResource HeaderStyleH1}"/>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="See what's been happening here at RIT!" Style="{StaticResource HeaderStyleH2}"/>
+            <Border Grid.Column="0" Grid.Row="2" Style="{StaticResource ListViewBorder}">
+                <ListView VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="NewsList"/>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </Page>
